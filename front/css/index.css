@@ -39,6 +39,7 @@ body {
 
 .hero-header {
   min-height: 100vh;
+  position: relative;
   background:
     radial-gradient(circle at 62% 50%, rgba(161, 15, 34, 0.08), transparent 20%),
     linear-gradient(180deg, #000000 0%, #020202 100%);
@@ -58,7 +59,10 @@ body {
   align-items: center;
   justify-content: center;
   gap: 18px;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 20;
 }
 
@@ -119,9 +123,9 @@ body {
 ========================= */
 
 .hero {
-  width: var(--container);
-  min-height: calc(100vh - var(--nav-height));
-  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
   display: grid;
   grid-template-columns: 1.08fr 0.92fr;
   align-items: stretch;
@@ -145,16 +149,22 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.74) 0%, rgba(0, 0, 0, 0.1) 14%, rgba(0, 0, 0, 0.1) 84%, rgba(0, 0, 0, 0.94) 100%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.05) 16%, rgba(0, 0, 0, 0.18) 80%, rgba(0, 0, 0, 0.88) 100%);
-  filter: blur(18px);
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0.74) 0%,
+      rgba(0, 0, 0, 0.10) 14%,
+      rgba(0, 0, 0, 0.10) 52%,
+      rgba(0, 0, 0, 0.60) 72%,
+      rgba(0, 0, 0, 0.88) 84%,
+      rgba(0, 0, 0, 1.00) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.26) 74%, rgba(0, 0, 0, 0.98) 100%);
+  filter: blur(20px);
   pointer-events: none;
   z-index: 3;
 }
 
 .hero__image {
   width: 100%;
-  height: calc(100vh - var(--nav-height));
+  height: 100vh;
   object-fit: cover;
   object-position: center;
   display: block;
@@ -162,6 +172,14 @@ body {
   box-shadow:
     34px 0 58px -30px rgba(161, 15, 34, 0.5),
     0 30px 50px -34px rgba(0, 0, 0, 0.96);
+  -webkit-mask-image: radial-gradient(ellipse 90% 86% at 44% 50%, #000 56%, rgba(0, 0, 0, 0.92) 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 86% at 44% 50%, #000 56%, rgba(0, 0, 0, 0.92) 68%, transparent 100%);
+  -webkit-mask-size: 154% 150%;
+  mask-size: 154% 150%;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
   position: relative;
   z-index: 1;
 }
@@ -185,8 +203,9 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.08) 42%, rgba(0, 0, 0, 0.34) 100%),
-    radial-gradient(circle at 86% 50%, rgba(161, 15, 34, 0.28), transparent 52%);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.08) 42%, rgba(0, 0, 0, 0.38) 84%, rgba(0, 0, 0, 0.75) 100%),
+    radial-gradient(circle at 92% 50%, rgba(161, 15, 34, 0.24), transparent 46%),
+    radial-gradient(circle at 100% 50%, rgba(0, 0, 0, 0.78), transparent 40%);
   pointer-events: none;
   z-index: 2;
 }
@@ -236,9 +255,28 @@ body {
   display: block;
   position: relative;
   z-index: 2;
+  animation: logo-enter 1.05s cubic-bezier(0.22, 0.61, 0.36, 1) 0.18s both;
   filter:
     drop-shadow(0 0 18px rgba(255, 255, 255, 0.03))
     drop-shadow(0 0 28px rgba(161, 15, 34, 0.10));
+}
+
+@keyframes logo-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(34px) scale(0.94);
+    filter:
+      blur(8px)
+      drop-shadow(0 0 10px rgba(161, 15, 34, 0.04));
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter:
+      drop-shadow(0 0 18px rgba(255, 255, 255, 0.03))
+      drop-shadow(0 0 28px rgba(161, 15, 34, 0.10));
+  }
 }
 
 /* =========================
@@ -247,7 +285,7 @@ body {
 
 @media (max-width: 980px) {
   :root {
-    --nav-height: 120px;
+    --nav-height: 82px;
   }
 
   .nav {
@@ -259,7 +297,7 @@ body {
   }
 
   .nav__list {
-    gap: 26px;
+    gap: 48px;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -272,7 +310,12 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .hero__brand {
+    order: 1;
+  }
+
   .hero__media {
+    order: 2;
     min-height: auto;
   }
 
@@ -284,8 +327,8 @@ body {
   .hero__media::after {
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.08) 18%, rgba(0, 0, 0, 0.24) 72%, rgba(0, 0, 0, 0.92) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.44) 0%, rgba(0, 0, 0, 0.08) 16%, rgba(0, 0, 0, 0.08) 84%, rgba(0, 0, 0, 0.6) 100%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.84) 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.3) 72%, rgba(0, 0, 0, 0.96) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.12) 16%, rgba(0, 0, 0, 0.12) 84%, rgba(0, 0, 0, 0.72) 100%);
     filter: blur(14px);
   }
 
@@ -296,10 +339,11 @@ body {
 
   .hero__brand::before {
     left: 50%;
-    top: 0;
+    top: auto;
+    bottom: 10px;
     transform: translateX(-50%);
-    width: 240px;
-    height: 160px;
+    width: 300px;
+    height: 120px;
   }
 
   .hero__logo {
@@ -309,12 +353,11 @@ body {
 
 @media (max-width: 640px) {
   :root {
-    --nav-height: 120px;
+    --nav-height: 88px;
   }
 
   .nav {
     padding: 16px 0;
-    gap: 12px;
   }
 
   .nav__logo {
@@ -322,7 +365,7 @@ body {
   }
 
   .nav__list {
-    gap: 14px 24px;
+    gap: 24px 40px;
   }
 
   .nav__list a {
@@ -342,5 +385,277 @@ body {
 
   .hero__logo {
     width: min(260px, 82%);
+  }
+}
+
+/* =========================
+  SECCIÓN: QUIÉN SOY
+========================= */
+
+.about {
+  background:
+    radial-gradient(circle at 80% 30%, rgba(161, 15, 34, 0.07), transparent 50%),
+    radial-gradient(circle at 10% 80%, rgba(161, 15, 34, 0.05), transparent 44%),
+    var(--bg-soft);
+  padding: 120px 0 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* línea decorativa superior */
+.about::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--container);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--line) 20%,
+    rgba(161, 15, 34, 0.35) 50%,
+    var(--line) 80%,
+    transparent 100%
+  );
+}
+
+.about__inner {
+  width: var(--container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* =========================
+  COLUMNA TEXTO
+========================= */
+
+.about__content {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* encabezado con número + título + línea */
+.about__heading-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.about__label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.9;
+}
+
+.about__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--text);
+  position: relative;
+}
+
+.about__title-dot {
+  color: var(--primary);
+}
+
+.about__title-line {
+  width: 52px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary) 0%, rgba(161, 15, 34, 0.2) 100%);
+  margin-top: 4px;
+}
+
+/* párrafos */
+.about__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about__paragraph {
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  font-weight: 300;
+  line-height: 1.82;
+  color: var(--muted);
+  letter-spacing: 0.015em;
+}
+
+.about__paragraph--highlight {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 400;
+  padding-left: 16px;
+  border-left: 1px solid var(--primary);
+  font-style: italic;
+}
+/* =========================
+  COLUMNA IMAGEN
+========================= */
+
+.about__media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+/* marco decorativo offset */
+.about__image-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid rgba(161, 15, 34, 0.22);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* esquina decorativa */
+.about__image-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  width: 72px;
+  height: 72px;
+  border-bottom: 2px solid var(--primary);
+  border-right: 2px solid var(--primary);
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0.7;
+}
+
+.about__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  display: block;
+  filter: saturate(1.05) contrast(1.04) brightness(0.8);
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.7s ease;
+}
+
+.about__image-wrap:hover .about__image {
+  transform: scale(1.04);
+  filter: saturate(1.1) contrast(1.05) brightness(0.88);
+}
+
+/* overlay de fusión en los bordes */
+.about__image-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(5, 5, 5, 0.42) 0%,
+      transparent 28%,
+      transparent 68%,
+      rgba(5, 5, 5, 0.72) 100%),
+    linear-gradient(90deg,
+      rgba(5, 5, 5, 0.52) 0%,
+      transparent 18%,
+      transparent 82%,
+      rgba(5, 5, 5, 0.52) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* resplandor rojo lateral */
+.about__image-glow {
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 120px;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(161, 15, 34, 0.28) 0%,
+    rgba(161, 15, 34, 0.08) 45%,
+    transparent 72%
+  );
+  filter: blur(30px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================
+  RESPONSIVE
+========================= */
+
+@media (max-width: 980px) {
+  .about {
+    padding: 90px 0 110px;
+  }
+
+  .about__inner {
+    grid-template-columns: 1fr;
+    gap: 52px;
+  }
+
+  .about__image-wrap {
+    aspect-ratio: 3 / 4;
+    max-height: 520px;
+  }
+
+  .about__image-glow {
+    left: 50%;
+    top: auto;
+    bottom: -30px;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about {
+    padding: 72px 0 88px;
+  }
+
+  .about__inner {
+    gap: 40px;
+  }
+
+  .about__title {
+    font-size: clamp(2.2rem, 9vw, 2.8rem);
+  }
+
+  .about__paragraph {
+    font-size: 0.9rem;
+    line-height: 1.76;
+  }
+
+  .about__image-wrap {
+    aspect-ratio: 3 / 4;
+    max-height: 420px;
+  }
+
+  .about__image-wrap::after {
+    bottom: -8px;
+    right: -8px;
+    width: 48px;
+    height: 48px;
   }
 }
