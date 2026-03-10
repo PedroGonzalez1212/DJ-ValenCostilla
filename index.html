@@ -66,7 +66,7 @@
           </p>
   
           <p class="about__paragraph">
-            Su estilo se destaca dentro de la escena urbana, fusionando reggaetón, pop, electrónico,
+            Su estilo se destaca dentro de la escena urbana, fusionando reggaetón, pop, electrónica,
             etc. Siempre con una selección cuidada y pensada para elevar la atmósfera de la pista.
             Lo que lo distingue es su capacidad para leer el momento, manejar la intensidad y
             construir una experiencia que se vive con ritmo y conexión.
@@ -93,5 +93,173 @@
       </div>
     </div>
   </section>
+  <!-- ================================
+  SECCIÓN: EQUIPO
+  ================================ -->
+  <section id="equipment" class="equipment">
+  
+    <div class="equipment__inner">
+  
+      <!-- ENCABEZADO -->
+      <div class="equipment__heading-wrap">
+        <span class="equipment__label">02</span>
+        <h2 class="equipment__title">Mi <span class="equipment__title-accent">Equipo</span></h2>
+        <div class="equipment__title-line"></div>
+      </div>
+  
+      <!-- IMAGEN CONSOLA -->
+      <div class="equipment__media">
+        <div class="equipment__image-wrap">
+          <img
+            src="./front/img/todo/consola.png"
+            alt="Setup DJ Valen Costilla"
+            class="equipment__image"
+          />
+          <div class="equipment__image-overlay"></div>
+        </div>
+        <div class="equipment__glow"></div>
+      </div>
+  
+      <!-- RIDER TÉCNICO -->
+      <div class="equipment__rider">
+        <p class="equipment__rider-label">Rider Técnico</p>
+  
+        <div class="equipment__grid">
+  
+          <div class="equipment__item">
+            <span class="equipment__item-icon">▸</span>
+            <div class="equipment__item-info">
+              <span class="equipment__item-name">CDJ-3000 / CDJ-2000nxs2</span>
+              <span class="equipment__item-detail">2 unidades — linkeadas</span>
+            </div>
+          </div>
+  
+          <div class="equipment__item">
+            <span class="equipment__item-icon">▸</span>
+            <div class="equipment__item-info">
+              <span class="equipment__item-name">Mixer A9 / V10 / DJM-900nxs</span>
+              <span class="equipment__item-detail">1 unidad</span>
+            </div>
+          </div>
+  
+          <div class="equipment__item">
+            <span class="equipment__item-icon">▸</span>
+            <div class="equipment__item-info">
+              <span class="equipment__item-name">Controladora All in One</span>
+              <span class="equipment__item-detail">RX3</span>
+            </div>
+          </div>
+  
+          <div class="equipment__item">
+            <span class="equipment__item-icon">▸</span>
+            <div class="equipment__item-info">
+              <span class="equipment__item-name">Monitoreo de cabina</span>
+              <span class="equipment__item-detail">e iluminación</span>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  <!-- ================================
+  SECCIÓN: LUGARES
+  ================================ -->
+  <section id="venues" class="venues">
+  
+    <div class="venues__inner">
+  
+      <!-- ENCABEZADO -->
+      <div class="venues__heading-wrap">
+        <span class="venues__label">03</span>
+        <h2 class="venues__title">Donde <span class="venues__title-accent">Suena</span></h2>
+        <p class="venues__subtitle">Escenarios y eventos que confían en su música</p>
+        <div class="venues__title-line"></div>
+      </div>
+  
+      <!-- GRILLA DE LOGOS -->
+      <div class="venues__grid">
+  
+        <!-- RESIDENCIA — destacado -->
+        <div class="venues__item venues__item--featured">
+          <div class="venues__logo-wrap">
+            <img
+              src="./front/img/logosboliches/LOGOS CRUZ ESPACIO-03.webp"
+              alt="Cruz Espacio"
+              class="venues__logo"
+            />
+          </div>
+          <span class="venues__badge">DJ Residente</span>
+        </div>
+  
+        <div class="venues__item">
+          <div class="venues__logo-wrap">
+            <img
+              src="./front/img/logosboliches/Campa_Logos_RGB-13.webp"
+              alt="Campa"
+              class="venues__logo"
+            />
+          </div>
+        </div>
+  
+        <div class="venues__item">
+          <div class="venues__logo-wrap">
+            <img
+              src="./front/img/logosboliches/APOLO 2026 LOGO.webp"
+              alt="Apolo"
+              class="venues__logo"
+            />
+          </div>
+        </div>
+  
+        <div class="venues__item">
+          <div class="venues__logo-wrap">
+            <img
+              src="./front/img/logosboliches/el_cuartito.png"
+              alt="El Cuartito"
+              class="venues__logo"
+            />
+          </div>
+        </div>
+  
+        <div class="venues__item">
+          <div class="venues__logo-wrap">
+            <img
+              src="./front/img/logosboliches/imperioo.webp"
+              alt="Imperio San Francisco"
+              class="venues__logo"
+            />
+          </div>
+        </div>
+  
+        <div class="venues__item">
+          <div class="venues__logo-wrap">
+            <img
+              src="./front/img/logosboliches/la_crozee.webp"
+              alt="La Croze San Francisco"
+              class="venues__logo"
+            />
+          </div>
+        </div>
+  
+      </div>
+  
+    </div>
+  </section>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('about--visible', 'equipment--visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+  
+    document.querySelectorAll(
+      '.about__content, .about__media, .equipment__heading-wrap, .equipment__media, .equipment__rider, .venues__heading-wrap, .venues__grid'
+    ).forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
