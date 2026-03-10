@@ -1026,7 +1026,7 @@ body {
 }
 
 /* =========================
-  SECCIÓN: LUGARES
+  SECCIÓN: LUGARES v2 — MARQUEE
 ========================= */
 
 .venues {
@@ -1034,7 +1034,7 @@ body {
     radial-gradient(circle at 20% 60%, rgba(161, 15, 34, 0.06), transparent 48%),
     radial-gradient(circle at 80% 20%, rgba(161, 15, 34, 0.05), transparent 44%),
     var(--bg-soft);
-  padding: 120px 0 140px;
+  padding: 120px 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -1057,15 +1057,6 @@ body {
   );
 }
 
-.venues__inner {
-  width: var(--container);
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 64px;
-}
-
 /* =========================
   ENCABEZADO
 ========================= */
@@ -1076,6 +1067,8 @@ body {
   align-items: center;
   gap: 12px;
   text-align: center;
+  width: var(--container);
+  margin: 0 auto 64px;
 }
 
 .venues__label {
@@ -1120,78 +1113,170 @@ body {
 }
 
 /* =========================
-  GRILLA
+  MARQUEE WRAPPER
 ========================= */
 
-.venues__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
+.venues__marquee-wrapper {
+  position: relative;
   width: 100%;
-  max-width: 900px;
+  padding: 48px 0 72px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(161, 15, 34, 0.07) 0%, transparent 68%);
+}
+
+/* líneas decorativas arriba y abajo */
+.venues__marquee-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.venues__marquee-line--top {
+  top: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--line) 15%,
+    rgba(161, 15, 34, 0.3) 50%,
+    var(--line) 85%,
+    transparent 100%
+  );
+}
+
+.venues__marquee-line--bottom {
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--line) 15%,
+    rgba(161, 15, 34, 0.3) 50%,
+    var(--line) 85%,
+    transparent 100%
+  );
+}
+
+/* fade en los bordes laterales */
+.venues__marquee-wrapper::before,
+.venues__marquee-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 180px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.venues__marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg-soft) 0%, transparent 100%);
+}
+
+.venues__marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg-soft) 0%, transparent 100%);
 }
 
 /* =========================
-  ITEM BASE
+  MARQUEE TRACK
 ========================= */
 
-.venues__item {
-  position: relative;
+.venues__marquee {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 44px 32px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--line);
-  transition: background 0.3s ease, border-color 0.3s ease;
-  cursor: default;
+  width: 100%;
   overflow: hidden;
 }
 
-.venues__item::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(161, 15, 34, 0.14) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+.venues__track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  animation: marquee-scroll 28s linear infinite;
+  will-change: transform;
+}
+
+.venues__marquee:hover .venues__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* =========================
+  SEPARADOR
+========================= */
+
+.venues__sep {
+  color: var(--primary);
+  font-size: 0.6rem;
+  opacity: 0.5;
+  padding: 0 40px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* =========================
+  ITEM
+========================= */
+
+.venues__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  cursor: default;
+  position: relative;
+  padding: 8px 16px;
+  transition: transform 0.3s ease;
 }
 
 .venues__item:hover {
-  border-color: rgba(161, 15, 34, 0.3);
-  background: rgba(161, 15, 34, 0.04);
+  transform: scale(1.08);
 }
 
-.venues__item:hover::before {
+/* =========================
+  LOGO
+========================= */
+
+.venues__logo {
+  width: auto;
+  max-width: 180px;
+  max-height: 80px;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.45;
+  transition: filter 0.35s ease, opacity 0.35s ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+.venues__item:hover .venues__logo {
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(15%)
+    sepia(100%)
+    saturate(1200%)
+    hue-rotate(330deg)
+    brightness(110%);
   opacity: 1;
 }
 
 /* =========================
-  ITEM DESTACADO — RESIDENTE
+  ITEM DESTACADO
 ========================= */
 
-.venues__item--featured {
-  border-color: rgba(161, 15, 34, 0.3);
-  background: rgba(161, 15, 34, 0.06);
-  flex-direction: column;
-  gap: 16px;
-}
-
-.venues__item--featured::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(161, 15, 34, 0.18) 0%, transparent 68%);
-  pointer-events: none;
-}
-
-.venues__item--featured:hover {
-  border-color: rgba(161, 15, 34, 0.55);
-  background: rgba(161, 15, 34, 0.1);
-}
-
 .venues__item--featured .venues__logo {
-  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(255, 255, 255, 0.15));
+  max-width: 220px;
+  max-height: 100px;
+  opacity: 0.9;
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.1));
 }
 
 .venues__item--featured:hover .venues__logo {
@@ -1203,22 +1288,21 @@ body {
     saturate(1200%)
     hue-rotate(330deg)
     brightness(110%)
-    drop-shadow(0 0 18px rgba(161, 15, 34, 0.8));
+    drop-shadow(0 0 16px rgba(161, 15, 34, 0.8));
+  opacity: 1;
 }
 
-/* badge "DJ Residente" */
 .venues__badge {
   font-family: var(--font-body);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--primary);
   border: 1px solid rgba(161, 15, 34, 0.4);
-  padding: 4px 12px;
-  position: relative;
-  z-index: 2;
-  transition: background 0.3s ease, color 0.3s ease;
+  padding: 3px 10px;
+  white-space: nowrap;
+  transition: background 0.3s ease;
 }
 
 .venues__item--featured:hover .venues__badge {
@@ -1226,67 +1310,412 @@ body {
 }
 
 /* =========================
-  LOGO
-========================= */
-
-.venues__logo-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
-}
-
-.venues__logo {
-  width: auto;
-  max-width: 200px;
-  max-height: 90px;
-  object-fit: contain;
-  display: block;
-  /* logos en blanco */
-  filter: brightness(0) invert(1);
-  opacity: 0.55;
-  transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
-}
-
-/* hover: rojo */
-.venues__item:not(.venues__item--featured):hover .venues__logo {
-  filter:
-    brightness(0)
-    saturate(100%)
-    invert(15%)
-    sepia(100%)
-    saturate(1200%)
-    hue-rotate(330deg)
-    brightness(110%);
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-/* logo del residente siempre más brillante */
-.venues__item--featured .venues__logo {
-  opacity: 0.95;
-  max-width: 320px;
-  max-height: 200px;
-}
-
-/* =========================
   ANIMACIÓN SCROLL
 ========================= */
 
 .venues__heading-wrap,
-.venues__grid {
+.venues__marquee-wrapper {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 1.6s cubic-bezier(0.22, 0.61, 0.36, 1),
               transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.venues__grid {
+.venues__marquee-wrapper {
   transition-delay: 0.2s;
 }
 
 .venues--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+  RESPONSIVE
+========================= */
+
+@media (max-width: 980px) {
+  .venues {
+    padding: 90px 0 0;
+  }
+
+  .venues__marquee-wrapper::before,
+  .venues__marquee-wrapper::after {
+    width: 80px;
+  }
+
+  .venues__logo {
+    max-width: 140px;
+    max-height: 64px;
+  }
+
+  .venues__item--featured .venues__logo {
+    max-width: 170px;
+    max-height: 80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .venues {
+    padding: 72px 0 0;
+  }
+
+  .venues__marquee-wrapper::before,
+  .venues__marquee-wrapper::after {
+    width: 48px;
+  }
+
+  .venues__sep {
+    padding: 0 24px;
+  }
+
+  .venues__logo {
+    max-width: 110px;
+    max-height: 52px;
+  }
+
+  .venues__item--featured .venues__logo {
+    max-width: 140px;
+    max-height: 66px;
+  }
+}
+
+/* =========================
+  SECCIÓN: CALENDARIO
+========================= */
+
+.calendar {
+  background:
+    radial-gradient(circle at 15% 50%, rgba(161, 15, 34, 0.07), transparent 46%),
+    radial-gradient(circle at 85% 20%, rgba(161, 15, 34, 0.05), transparent 42%),
+    var(--bg);
+  padding: 120px 0 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.calendar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--container);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--line) 20%,
+    rgba(161, 15, 34, 0.35) 50%,
+    var(--line) 80%,
+    transparent 100%
+  );
+}
+
+.calendar__inner {
+  width: var(--container);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 72px;
+}
+
+/* =========================
+  ENCABEZADO
+========================= */
+
+.calendar__heading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.calendar__label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--primary);
+  opacity: 0.9;
+}
+
+.calendar__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.calendar__title-accent {
+  color: var(--primary);
+}
+
+.calendar__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.38);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.calendar__title-line {
+  width: 52px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(161, 15, 34, 0.2) 0%, var(--primary) 50%, rgba(161, 15, 34, 0.2) 100%);
+  margin-top: 4px;
+}
+
+/* =========================
+  MESES
+========================= */
+
+.calendar__months {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  width: 100%;
+  max-width: 1000px;
+  align-items: start;
+}
+
+/* =========================
+  BLOQUE MES
+========================= */
+
+.calendar__month-block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.calendar__month-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+.calendar__month-name {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.calendar__month-year {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.calendar__month-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(161, 15, 34, 0.5) 0%, var(--line) 60%, transparent 100%);
+}
+
+/* =========================
+  EVENTOS
+========================= */
+
+.calendar__events {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calendar__event {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* barra roja izquierda al hover */
+.calendar__event::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--primary);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* glow de fondo al hover */
+.calendar__event::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 0% 50%, rgba(161, 15, 34, 0.1) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.calendar__event:hover {
+  border-color: rgba(161, 15, 34, 0.25);
+  background: rgba(161, 15, 34, 0.04);
+}
+
+.calendar__event:hover::before {
+  transform: scaleY(1);
+}
+
+.calendar__event:hover::after {
+  opacity: 1;
+}
+
+/* TBA — apagado */
+.calendar__event--tba {
+  opacity: 0.45;
+}
+
+.calendar__event--tba .calendar__event-name {
+  font-style: italic;
+  letter-spacing: 0.12em;
+}
+
+/* =========================
+  NÚMERO DÍA
+========================= */
+
+.calendar__event-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 38px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.calendar__event-day {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+.calendar__event:hover .calendar__event-day {
+  color: var(--primary);
+}
+
+.calendar__event-weekday {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* =========================
+  DIVISOR VERTICAL
+========================= */
+
+.calendar__event-divider {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.1), transparent);
+  flex-shrink: 0;
+}
+
+/* =========================
+  INFO EVENTO
+========================= */
+
+.calendar__event-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.calendar__event-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.calendar__event-venue {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* dot decorativo derecha */
+.calendar__event-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(161, 15, 34, 0.4);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.calendar__event:hover .calendar__event-dot {
+  background: var(--primary);
+  box-shadow: 0 0 8px rgba(161, 15, 34, 0.7);
+}
+
+/* =========================
+  ANIMACIÓN SCROLL
+========================= */
+
+.calendar__heading-wrap,
+.calendar__months {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.calendar__months {
+  transition-delay: 0.2s;
+}
+
+.calendar--visible {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
@@ -1296,40 +1725,32 @@ body {
 ========================= */
 
 @media (max-width: 980px) {
-  .venues {
+  .calendar {
     padding: 90px 0 110px;
   }
 
-  .venues__grid {
-    max-width: 100%;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .venues__item {
-    padding: 36px 24px;
+  .calendar__months {
+    grid-template-columns: 1fr;
+    gap: 52px;
+    max-width: 560px;
   }
 }
 
 @media (max-width: 640px) {
-  .venues {
+  .calendar {
     padding: 72px 0 88px;
   }
 
-  .venues__grid {
-    grid-template-columns: 1fr;
+  .calendar__event {
+    padding: 16px 16px;
+    gap: 14px;
   }
 
-  .venues__item {
-    padding: 32px 20px;
+  .calendar__event-day {
+    font-size: 1.3rem;
   }
 
-  .venues__logo {
-    max-width: 110px;
-    max-height: 52px;
-  }
-
-  .venues__item--featured .venues__logo {
-    max-width: 124px;
-    max-height: 58px;
+  .calendar__event-name {
+    font-size: 0.88rem;
   }
 }
