@@ -197,19 +197,6 @@ body {
   z-index: 2;
 }
 
-/* overlay oscuro para sobriedad */
-.hero__media::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.08) 42%, rgba(0, 0, 0, 0.38) 84%, rgba(0, 0, 0, 0.75) 100%),
-    radial-gradient(circle at 92% 50%, rgba(161, 15, 34, 0.24), transparent 46%),
-    radial-gradient(circle at 100% 50%, rgba(0, 0, 0, 0.78), transparent 40%);
-  pointer-events: none;
-  z-index: 2;
-}
-
 /* =========================
   LOGO SIDE
 ========================= */
