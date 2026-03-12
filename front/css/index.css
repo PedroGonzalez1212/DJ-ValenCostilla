@@ -1120,7 +1120,7 @@ body {
 .venues__marquee-wrapper {
   position: relative;
   width: 100%;
-  padding: 40px 0 56px;
+  padding: 64px 0 80px;
   overflow: hidden;
   background:
     radial-gradient(ellipse at 50% 50%, rgba(161, 15, 34, 0.07) 0%, transparent 68%);
@@ -1273,8 +1273,8 @@ body {
 ========================= */
 
 .venues__item--featured .venues__logo {
-  max-width: 300px;
-  max-height: 150px;
+  max-width: 420px;
+  max-height: 240px;
   opacity: 0.9;
   filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255,255,255,0.1));
 }
@@ -1351,12 +1351,12 @@ body {
 
   .venues__logo {
     max-width: 200px;
-    max-height: 108px;
+    max-height: 150px;
   }
 
   .venues__item--featured .venues__logo {
-    max-width: 224x;
-    max-height: 120px;
+    max-width: 260px;
+    max-height: 160px;
   }
 }
 
@@ -1376,12 +1376,12 @@ body {
 
   .venues__logo {
     max-width: 160px;
-    max-height: 88px;
+    max-height: 120px;
   }
 
   .venues__item--featured .venues__logo {
-    max-width: 188px;
-    max-height: 100px;
+    max-width: 268px;
+    max-height: 160px;
   }
 }
 
@@ -2012,7 +2012,7 @@ body {
 }
 
 /* ================================
-   SECCIÓN: SETS / VIDEOS
+  SECCIÓN: SETS / VIDEOS
 ================================ */
 
 .sets {
@@ -2153,11 +2153,15 @@ body {
 }
 
 .sets__item.playing .sets__overlay {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0);
+  opacity: 0;
+  pointer-events: none;
 }
 
-.sets__item.playing .sets__overlay:hover {
+.sets__item.playing:hover .sets__overlay {
   background: rgba(0, 0, 0, 0.25);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .sets__play-btn {
@@ -2225,6 +2229,13 @@ body {
     grid-template-columns: 1fr;
     max-width: 320px;
     margin: 0 auto;
+  }
+}
+
+@media (hover: none) {
+  .sets__item.playing .sets__overlay {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
