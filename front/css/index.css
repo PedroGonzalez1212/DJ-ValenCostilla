@@ -1194,7 +1194,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0;
-  animation: marquee-scroll 28s linear infinite;
+  animation: marquee-scroll 16s linear infinite;
   will-change: transform;
 }
 
@@ -2234,8 +2234,13 @@ body {
 
 @media (hover: none) {
   .sets__item.playing .sets__overlay {
-    opacity: 0;
-    pointer-events: none;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .sets__item.playing .sets__play-btn {
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 }
 
