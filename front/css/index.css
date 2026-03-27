@@ -1212,11 +1212,17 @@ body {
   align-items: center;
   gap: 0;
   animation: marquee-scroll 16s linear infinite;
-  will-change: transform;
 }
 
-.venues__marquee:hover .venues__track {
-  animation-play-state: paused;
+/* pausa solo en dispositivos con hover real (no touch) */
+@media (hover: hover) and (pointer: fine) {
+  .venues__track {
+    will-change: transform;
+  }
+
+  .venues__marquee:hover .venues__track {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes marquee-scroll {
@@ -1335,16 +1341,11 @@ body {
   ANIMACIÓN SCROLL
 ========================= */
 
-.venues__heading-wrap,
-.venues__marquee-wrapper {
+.venues__heading-wrap {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 1.6s cubic-bezier(0.22, 0.61, 0.36, 1),
               transform 1.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-.venues__marquee-wrapper {
-  transition-delay: 0.2s;
 }
 
 .venues--visible {
