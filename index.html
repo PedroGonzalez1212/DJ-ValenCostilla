@@ -61,7 +61,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" /></noscript>
 
 
 <!-- CSS -->
@@ -70,7 +71,7 @@
 
 
 <!-- Favicon -->
-<link rel="icon" href="./front/img/logos/favicon.PNG" type="image/png">
+<link rel="icon" href="./front/img/logos/favicon.webp" type="image/png">
 
 </head>
 <body>
@@ -95,6 +96,9 @@
           src="./front/img/todo/hero.webp"
           alt="DJ Valen Costilla en el escenario"
           class="hero__image"
+          width="1600"
+          height="1068"
+          fetchpriority="high"
         />
       </div>
 
@@ -103,6 +107,8 @@
           src="./front/img/logos/valen-costilla-logo.webp"
           alt="Logo de DJ Valen Costilla"
           class="hero__logo"
+          width="1080"
+          height="1080"
         />
       </div>
     </section>
@@ -156,6 +162,8 @@
               alt="DJ Valen Costilla actuando en Córdoba"
               class="about__image"
               loading="lazy"
+              width="711"
+              height="1067"
             />
             <div class="about__image-overlay"></div>
             <div class="about__image-glow"></div>
@@ -186,71 +194,71 @@
 
             <!-- set 1 -->
             <div class="venues__item venues__item--featured">
-              <img src="./front/img/logosboliches/logos-cruz-espacio.webp" alt="Cruz Espacio logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/logos-cruz-espacio.webp" alt="Cruz Espacio logo" class="venues__logo" width="843" height="596" decoding="async" />
               <span class="venues__badge">Residente</span>
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/Campa_Logos_RGB-13.webp" alt="Campa logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/Campa_Logos_RGB-13.webp" alt="Campa logo" class="venues__logo" width="3508" height="2480" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/apolo-2026-logo.webp" alt="Apolo 2026 logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/apolo-2026-logo.webp" alt="Apolo 2026 logo" class="venues__logo" width="1250" height="1250" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/el_cuartito.webp" alt="El Cuartito logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/el_cuartito.webp" alt="El Cuartito logo" class="venues__logo" width="1446" height="181" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/imperioo.webp" alt="Imperio San Francisco logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/imperioo.webp" alt="Imperio San Francisco logo" class="venues__logo" width="2362" height="994" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/la_crozee.webp" alt="La Croze San Francisco logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/la_crozee.webp" alt="La Croze San Francisco logo" class="venues__logo" width="1080" height="716" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/weare.webp" alt="We Are logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/weare.webp" alt="We Are logo" class="venues__logo" width="1024" height="1024" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/fruta.webp" alt="Fruta Club logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/fruta.webp" alt="Fruta Club logo" class="venues__logo" width="520" height="520" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
 
             <!-- set 2 (copia para loop infinito) -->
             <div class="venues__item venues__item--featured">
-              <img src="./front/img/logosboliches/logos-cruz-espacio.webp" alt="Cruz Espacio logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/logos-cruz-espacio.webp" alt="Cruz Espacio logo" class="venues__logo" width="843" height="596" decoding="async" />
               <span class="venues__badge">Residente</span>
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/Campa_Logos_RGB-13.webp" alt="Campa logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/Campa_Logos_RGB-13.webp" alt="Campa logo" class="venues__logo" width="3508" height="2480" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/apolo-2026-logo.webp" alt="Apolo 2026 logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/apolo-2026-logo.webp" alt="Apolo 2026 logo" class="venues__logo" width="1250" height="1250" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/el_cuartito.webp" alt="El Cuartito logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/el_cuartito.webp" alt="El Cuartito logo" class="venues__logo" width="1446" height="181" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/imperioo.webp" alt="Imperio San Francisco logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/imperioo.webp" alt="Imperio San Francisco logo" class="venues__logo" width="2362" height="994" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/la_crozee.webp" alt="La Croze San Francisco logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/la_crozee.webp" alt="La Croze San Francisco logo" class="venues__logo" width="1080" height="716" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/weare.webp" alt="We Are logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/weare.webp" alt="We Are logo" class="venues__logo" width="1024" height="1024" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
             <div class="venues__item">
-              <img src="./front/img/logosboliches/fruta.webp" alt="Fruta Club logo" class="venues__logo" loading="lazy" />
+              <img src="./front/img/logosboliches/fruta.webp" alt="Fruta Club logo" class="venues__logo" width="520" height="520" decoding="async" />
             </div>
             <span class="venues__sep">✦</span>
 
@@ -496,6 +504,8 @@
               alt="Consola Pioneer CDJ-3000 en el setup de DJ Valen Costilla"
               class="equipment__image"
               loading="lazy"
+              width="750"
+              height="750"
             />
             <div class="equipment__image-overlay"></div>
           </div>

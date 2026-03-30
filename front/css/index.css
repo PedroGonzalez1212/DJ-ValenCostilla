@@ -175,6 +175,8 @@ body {
   align-items: stretch;
   justify-content: flex-start;
   min-height: 100%;
+  transform: translateZ(0); /* aísla el blur del ::after en su propia capa — evita repaint en scroll */
+  contain: paint;
 }
 
 .hero__media::after {
@@ -1139,6 +1141,7 @@ body {
   width: 100%;
   padding: 64px 0 80px;
   overflow: hidden;
+  transform: translateZ(0); /* fuerza capa GPU propia → Safari respeta overflow:hidden sobre will-change hijos */
   background:
     radial-gradient(ellipse at 50% 50%, rgba(161, 15, 34, 0.07) 0%, transparent 68%);
 }
@@ -1204,7 +1207,7 @@ body {
 .venues__marquee {
   display: flex;
   width: 100%;
-  overflow: hidden;
+  /* overflow removed — parent wrapper already clips */
 }
 
 .venues__track {
@@ -1212,14 +1215,22 @@ body {
   align-items: center;
   gap: 0;
   animation: marquee-scroll 16s linear infinite;
+  animation-play-state: paused; /* arranca pausado — evita que corra antes de que las imágenes estén listas */
 }
 
-/* pausa solo en dispositivos con hover real (no touch) */
+/* arranca cuando el wrapper entra al viewport (JS agrega venues--visible) */
+.venues__marquee-wrapper.venues--visible .venues__track {
+  animation-play-state: running;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .venues__track {
     will-change: transform;
   }
+}
 
+/* pausa solo en dispositivos con hover real (no touch) */
+@media (hover: hover) and (pointer: fine) {
   .venues__marquee:hover .venues__track {
     animation-play-state: paused;
   }
@@ -1375,6 +1386,10 @@ body {
   .venues__item--featured .venues__logo {
     max-width: 260px;
     max-height: 160px;
+  }
+
+  .venues__item {
+    transition: none;
   }
 }
 
@@ -1774,7 +1789,7 @@ body {
 }
 
 /* ================================
-   SECCIÓN: CONTACTO / BOOKING
+  SECCIÓN: CONTACTO / BOOKING
 ================================ */
 
 .booking {
@@ -2183,11 +2198,10 @@ body {
   }
 
   /* 3rd video centered in 2-col layout */
-  .sets__grid iframe:nth-child(3) {
+  .sets__video-wrap:nth-child(3) {
     grid-column: 1 / -1;
     max-width: 240px;
     margin: 0 auto;
-    width: 100%;
   }
 }
 
@@ -2202,7 +2216,7 @@ body {
     gap: 20px;
   }
 
-  .sets__grid iframe:nth-child(3) {
+  .sets__video-wrap:nth-child(3) {
     grid-column: auto;
     max-width: 100%;
     margin: 0;
@@ -2210,7 +2224,7 @@ body {
 }
 
 @media (hover: none) {
-  .sets__grid iframe:hover {
+  .sets__video-wrap:hover {
     transform: none;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.04);
   }
